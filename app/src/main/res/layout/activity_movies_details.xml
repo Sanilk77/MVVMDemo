@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable name="model"
+                  type="com.example.mvvmdemo.ui.details.MovieDetailsViewModel"/>
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/ctlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    app:contentScrim="?attr/colorPrimary"
+
+                    app:expandedTitleTextAppearance="@android:color/transparent"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgBackDrop"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        app:layout_collapseMode="parallax"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/default_loadng"
+                        app:imageUrl="@{model.moviePosterPath}"
+                        app:layout_collapseParallaxMultiplier="0.7"/>
+
+                <com.google.android.material.appbar.MaterialToolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        app:layout_collapseMode="pin"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lblTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:textStyle="bold"
+                        android:text="@{model.movieTitle}"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/lblVotes"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lblReleaseDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@{model.movieDate}"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintLeft_toLeftOf="@+id/lblTitle"
+                        app:layout_constraintTop_toBottomOf="@+id/lblTitle"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lblVotes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:drawableLeft="@drawable/favorite"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text="@{model.moviePopularity}"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/lblTitle"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lblAverageVote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="@{model.movieVotes}"
+                        app:layout_constraintRight_toRightOf="@+id/lblVotes"
+                        app:layout_constraintTop_toBottomOf="@+id/lblVotes"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lblTimeGenre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@{model.movieGenres}"
+                        android:textColor="#696969"
+                        android:textSize="14sp"
+                        app:layout_constraintLeft_toLeftOf="@+id/lblTitle"
+                        app:layout_constraintTop_toBottomOf="@+id/lblReleaseDate"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lblLanguages"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@{model.movieLanguages}"
+                        android:textColor="#696969"
+                        android:textSize="14sp"
+                        app:layout_constraintLeft_toLeftOf="@+id/lblTitle"
+                        app:layout_constraintTop_toBottomOf="@+id/lblTimeGenre"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lblHomePage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@{model.movieHomePage}"
+                        android:textColor="#000000"
+                        android:autoLink="web"
+                        android:linksClickable="true"
+                        android:textSize="14sp"
+                        app:layout_constraintLeft_toLeftOf="@+id/lblTitle"
+                        app:layout_constraintTop_toBottomOf="@+id/lblLanguages"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lblPlot"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@{model.movieOverview}"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="10dp"
+                        android:lineSpacingMultiplier="1.2"
+                        android:layout_marginRight="10dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/lblHomePage"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
